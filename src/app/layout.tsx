@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { RevealObserver } from "@/components/motion/RevealObserver";
-import { asset, siteConfig } from "@/lib/site";
+import { absoluteUrl, canonical, siteConfig } from "@/lib/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -28,7 +28,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.siteUrl),
+  metadataBase: new URL(siteConfig.origin),
   title: {
     default: "Australian Saddle Company — Custom Made Australian Saddles",
     template: "%s — Australian Saddle Company",
@@ -45,12 +45,15 @@ export const metadata: Metadata = {
     "oilskin",
     "saddle fitting",
   ],
+  alternates: {
+    canonical: canonical("/"),
+  },
   openGraph: {
     title: "Australian Saddle Company — Custom Made Australian Saddles",
     description:
       "Custom made Australian saddles and tack. Hand-built in Mt. Vernon, Ohio since 1987.",
     type: "website",
-    images: [asset("/images/brand/banner-american-poley.jpg")],
+    images: [absoluteUrl("/images/brand/banner-american-poley.jpg")],
   },
 };
 

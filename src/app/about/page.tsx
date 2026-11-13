@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { products } from "@/data/catalog";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonical("/about") },
   title: "Our Workshop",
   description:
     "Australian Saddle Company has been building custom Australian saddles and tack in Mt. Vernon, Ohio since 1987.",

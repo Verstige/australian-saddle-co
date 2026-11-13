@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonical("/fitting") },
   title: "Fitting a Saddle",
   description:
     "How to measure your horse for an Australian saddle. Send us tracings and a side photo with the head up, and we'll shape the tree to fit.",

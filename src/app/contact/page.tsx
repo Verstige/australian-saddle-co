@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Phone, Envelope, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonical("/contact") },
   title: "Contact Us",
   description:
     "Reach Australian Saddle Company at 10700 Old Delaware Rd, Mt. Vernon, Ohio. Phone or fax 740-393-3111.",

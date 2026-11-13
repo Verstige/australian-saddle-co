@@ -6,7 +6,7 @@ import { products, collections } from "@/data/catalog";
 import { ProductPurchase } from "@/components/product/ProductPurchase";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductRail } from "@/components/product/ProductRail";
-import { asset } from "@/lib/site";
+import { absoluteUrl, canonical } from "@/lib/site";
 
 export function generateStaticParams() {
   return products.map((p) => ({
@@ -28,7 +28,8 @@ export async function generateMetadata({
     description:
       p.description.slice(0, 155) ||
       `${p.title} from Australian Saddle Company.`,
-    openGraph: { images: p.images.slice(0, 3).map(asset) },
+    alternates: { canonical: canonical(`/shop/${p.collection}/${p.handle}`) },
+    openGraph: { images: p.images.slice(0, 3).map(absoluteUrl) },
   };
 }
 

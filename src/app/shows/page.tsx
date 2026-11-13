@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { shows } from "@/data/shows";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: canonical("/shows") },
   title: "Upcoming Shows",
   description:
     "Find Australian Saddle Company at Cheyenne Frontier Days, the Quarter Horse Congress, Equine Affaire, Cowboy Christmas and more.",

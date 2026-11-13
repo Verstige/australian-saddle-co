@@ -25,3 +25,26 @@ export function asset(src: string): string {
   const clean = src.startsWith("/") ? src : `/${src}`;
   return `${siteConfig.basePath}${clean}`;
 }
+
+/**
+ * Build a fully-qualified URL for a public asset.
+ *
+ * Metadata (og:image, twitter:image) is resolved against `metadataBase`, so
+ * these must be absolute and must NOT be double-prefixed — hence a dedicated
+ * helper rather than `asset()`.
+ */
+export function absoluteUrl(src: string): string {
+  if (!src) return src;
+  if (/^https?:\/\//i.test(src)) return src;
+  return `${siteConfig.origin}${asset(src)}`;
+}
+
+/**
+ * Canonical URL for a route, e.g. /shop/saddles/ -> full URL.
+ */
+export function canonical(path: string): string {
+  const clean = path.startsWith("/") ? path : `/${path}`;
+  const withSlash = clean.endsWith("/") ? clean : `${clean}/`;
+  return `${siteConfig.origin}${siteConfig.basePath}/${withSlash.slice(1)}`;
+}
+
