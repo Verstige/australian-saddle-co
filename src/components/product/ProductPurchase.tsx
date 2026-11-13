@@ -10,6 +10,7 @@ type VariantRecord = {
   title: string;
   price: number;
   available: boolean;
+  id?: number;
   option1?: string;
   option2?: string;
   option3?: string;
@@ -66,6 +67,7 @@ export function ProductPurchase({ product }: { product: Product }) {
       price: variant.price,
       qty,
       image: product.images[0] ?? "",
+      variantId: variant.id,
     });
   }
 

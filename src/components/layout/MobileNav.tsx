@@ -6,6 +6,8 @@ import { X, ArrowRight } from "@phosphor-icons/react";
 import { collections } from "@/data/catalog";
 
 const LINKS = [
+  { href: "/build", label: "Build Your Saddle" },
+  { href: "/compare", label: "Compare Saddles" },
   { href: "/shop/all", label: "Full Catalog" },
   { href: "/fitting", label: "Fitting a Saddle" },
   { href: "/shows", label: "Upcoming Shows" },

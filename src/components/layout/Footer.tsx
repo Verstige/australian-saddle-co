@@ -5,6 +5,8 @@ import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { asset } from "@/lib/site";
 
 const COMPANY = [
+  { href: "/build", label: "Build Your Saddle" },
+  { href: "/compare", label: "Compare Saddles" },
   { href: "/about", label: "Our Workshop" },
   { href: "/fitting", label: "Fitting a Saddle" },
   { href: "/shows", label: "Upcoming Shows" },

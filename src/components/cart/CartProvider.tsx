@@ -18,6 +18,8 @@ export type CartLine = {
   price: number;
   qty: number;
   image: string;
+  /** Shopify variant id — needed to hand off to the real checkout. */
+  variantId?: number;
 };
 
 type CartState = {

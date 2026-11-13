@@ -9,7 +9,7 @@ import { asset } from "@/lib/site";
 const byHandle = (h: string) => products.find((p) => p.handle === h)!;
 
 export default function HomePage() {
-  const hero = byHandle("saddle-american-poley");
+  const hero = byHandle("patrol-poley");
   const featured = featuredHandles
     .map(byHandle)
     .filter(Boolean);
@@ -61,20 +61,36 @@ export default function HomePage() {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link href="/shop/saddles" className="btn btn-primary">
-                Shop the saddles
+              <Link href="/build" className="btn btn-primary">
+                Build your saddle
                 <ArrowRight size={15} weight="bold" />
               </Link>
               <Link href="/fitting" className="btn btn-ghost">
-                How fitting works
+                Find the right fit
+              </Link>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link
+                href="/compare"
+                className="label text-[9.5px] text-ink-muted transition-colors hover:text-tan-600"
+              >
+                Compare all 8 models
+              </Link>
+              <span className="h-3 w-px bg-leather-900/15" aria-hidden />
+              <Link
+                href="/shop/saddles"
+                className="label text-[9.5px] text-ink-muted transition-colors hover:text-tan-600"
+              >
+                Browse the range
               </Link>
             </div>
 
             {/* Proof strip */}
             <dl className="mt-14 grid max-w-lg grid-cols-3 gap-px overflow-hidden border border-leather-900/12 bg-leather-900/12">
               {[
-                { k: "77", v: "Products built" },
                 { k: "8", v: "Saddle models" },
+                { k: "$1,295", v: "Starting price" },
                 { k: "1987", v: "In Mt. Vernon" },
               ].map((s) => (
                 <div key={s.v} className="bg-paper px-4 py-4">

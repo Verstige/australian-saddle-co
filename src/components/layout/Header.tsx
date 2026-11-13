@@ -95,6 +95,36 @@ export function Header() {
 
           {/* Desktop nav */}
           <nav className="ml-4 hidden items-center gap-1 lg:flex">
+            <Link
+              href="/build"
+              className={`label relative px-3 py-2 text-[10px] transition-colors ${
+                isActive("/build")
+                  ? "text-tan-600"
+                  : "text-ink-muted hover:text-leather-900"
+              }`}
+            >
+              Build
+              <span
+                className={`absolute inset-x-3 -bottom-0.5 h-px origin-left bg-tan-600 transition-transform duration-400 ${
+                  isActive("/build") ? "scale-x-100" : "scale-x-0"
+                }`}
+              />
+            </Link>
+            <Link
+              href="/compare"
+              className={`label relative px-3 py-2 text-[10px] transition-colors ${
+                isActive("/compare")
+                  ? "text-tan-600"
+                  : "text-ink-muted hover:text-leather-900"
+              }`}
+            >
+              Compare
+              <span
+                className={`absolute inset-x-3 -bottom-0.5 h-px origin-left bg-tan-600 transition-transform duration-400 ${
+                  isActive("/compare") ? "scale-x-100" : "scale-x-0"
+                }`}
+              />
+            </Link>
             {collections.map((c) => (
               <Link
                 key={c.slug}

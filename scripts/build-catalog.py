@@ -138,6 +138,7 @@ for c in cat:
             'title': v['title'],
             'price': v['price'],
             'available': v['available'],
+            'id': v.get('id') or 0,
             'option1': v.get('option1') or '',
             'option2': v.get('option2') or '',
             'option3': v.get('option3') or '',
@@ -181,7 +182,20 @@ def ts_product(p):
     lines.append(f"    optionValues: {{{ov}}},")
     vs = []
     for v in p['variants']:
-        vs.append(f"{{ title: {js_str(v['title'])}, price: {v['price']}, available: {'true' if v['available'] else 'false'} }}")
+        # option1/2/3 are what the variant picker matches against — without
+        # them the picker cannot resolve the selected combination to a variant.
+        vs.append(
+            "{ title: %s, price: %s, available: %s, id: %s, option1: %s, option2: %s, option3: %s }"
+            % (
+                js_str(v["title"]),
+                v["price"],
+                "true" if v["available"] else "false",
+                v.get("id") if v.get("id") is not None else 0,
+                js_str(v.get("option1") or ""),
+                js_str(v.get("option2") or ""),
+                js_str(v.get("option3") or ""),
+            )
+        )
     lines.append(f"    variants: [{', '.join(vs)}],")
     lines.append('  },')
     return '\n'.join(lines)
@@ -194,6 +208,10 @@ out.append('export type Variant = {')
 out.append('  title: string;')
 out.append('  price: number;')
 out.append('  available: boolean;')
+out.append('  id: number;')
+out.append('  option1: string;')
+out.append('  option2: string;')
+out.append('  option3: string;')
 out.append('};')
 out.append('')
 out.append('export type Product = {')

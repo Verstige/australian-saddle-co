@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { canonical } from "@/lib/site";
+import { SaddleFinder } from "@/components/build/SaddleFinder";
 
 export const metadata: Metadata = {
   alternates: { canonical: canonical("/fitting") },
@@ -50,6 +51,29 @@ export default function FittingPage() {
             through the tracing method we use on every build — the same one we
             ask for before we cut a tree.
           </p>
+        </div>
+      </section>
+
+      {/* ============================================================
+          FINDER — lead with the fit, not the product
+          ============================================================ */}
+      <section className="border-b border-leather-900/10 bg-paper-deep">
+        <div className="mx-auto max-w-[1400px] px-4 py-14 sm:px-6 sm:py-20">
+          <div className="reveal">
+            <p className="label text-[10px] text-tan-600">Start here</p>
+            <h2 className="font-display mt-4 max-w-[20ch] text-[clamp(1.9rem,4.2vw,3rem)] font-semibold leading-[1.04] tracking-[-0.02em] text-leather-900">
+              Find the saddle that fits
+            </h2>
+            <p className="mt-5 max-w-[54ch] text-[15.5px] leading-[1.78] text-ink-muted">
+              Three questions about what you ride and who you ride with. We&apos;ll
+              narrow eight models down to the three that make sense — then you
+              send tracings and we shape the tree.
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <SaddleFinder />
+          </div>
         </div>
       </section>
 

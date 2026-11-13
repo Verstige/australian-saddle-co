@@ -1,12 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
-import { ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight, Warning, ArrowSquareOut } from "@phosphor-icons/react";
 import { asset } from "@/lib/site";
+import { buildCheckoutUrl } from "@/lib/checkout";
 
 export default function CheckoutPage() {
   const { lines, subtotal, count, setQty, remove } = useCart();
+  const [error, setError] = useState<string | null>(null);
+
+  const checkoutUrl = buildCheckoutUrl(lines);
 
   if (lines.length === 0) {
     return (
@@ -19,10 +24,15 @@ export default function CheckoutPage() {
             Nothing to check out yet. Every saddle is built to order — find the
             one that fits your horse.
           </p>
-          <Link href="/shop/all" className="btn btn-primary mt-8">
-            Browse the catalog
-            <ArrowRight size={15} weight="bold" />
-          </Link>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/build" className="btn btn-accent">
+              Build a saddle
+              <ArrowRight size={15} weight="bold" />
+            </Link>
+            <Link href="/shop/saddles" className="btn btn-ghost">
+              Browse saddles
+            </Link>
+          </div>
         </div>
       </section>
     );
@@ -112,19 +122,49 @@ export default function CheckoutPage() {
               </div>
             </dl>
 
-            <a
-              href="https://www.australiansaddleco.com/cart"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-accent mt-7 w-full"
-            >
-              Continue to secure checkout
-              <ArrowRight size={15} weight="bold" />
-            </a>
+            {checkoutUrl ? (
+              <>
+                <a
+                  href={checkoutUrl}
+                  className="btn btn-accent mt-7 w-full"
+                  onClick={() => setError(null)}
+                >
+                  Checkout securely
+                  <ArrowSquareOut size={15} weight="bold" />
+                </a>
+                <p className="mt-4 text-[12px] leading-relaxed text-ink-faint">
+                  Takes you to our live store to enter payment and shipping.
+                  Your selection carries over exactly as shown.
+                </p>
+              </>
+            ) : (
+              <div className="mt-7 border-l-2 border-tan-500 bg-paper-deep/60 px-4 py-3">
+                <p className="flex items-start gap-2 text-[13px] leading-relaxed text-ink-muted">
+                  <Warning
+                    size={15}
+                    weight="fill"
+                    className="mt-0.5 shrink-0 text-tan-600"
+                  />
+                  <span>
+                    This item needs a quote before it can be ordered online. Call
+                    the workshop at{" "}
+                    <a
+                      href="tel:+17403933111"
+                      className="tnum text-tan-600 hover:text-tan-700"
+                    >
+                      740-393-3111
+                    </a>{" "}
+                    and we&apos;ll set it up.
+                  </span>
+                </p>
+              </div>
+            )}
 
-            <p className="mt-4 text-[12px] leading-relaxed text-ink-faint">
-              Checkout is handled by our Shopify store. Custom-built saddles ship
-              after your fitting is confirmed — we&apos;ll call to go over it.
+            {error && <p className="mt-3 text-[12px] text-tan-700">{error}</p>}
+
+            <p className="mt-4 border-t border-leather-900/10 pt-4 text-[12px] leading-relaxed text-ink-faint">
+              Custom-built saddles ship after your fitting is confirmed — we
+              &apos;ll call to go over it.
             </p>
           </div>
         </aside>
